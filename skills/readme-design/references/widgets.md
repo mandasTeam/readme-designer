@@ -45,6 +45,20 @@ O selo do komarev.com não aceita estilo. Por isso:
 
 Avise o usuário: o número atualiza na cadência do cron, não a cada visita.
 
+## Stats e sequência próprios
+
+Quando os cards de serviço destoam do tema, gere os dois no mesmo script do contador:
+
+- Uma consulta GraphQL com os totais (`pullRequests`, `issues`, `repositories{nodes{stargazerCount}}`,
+  `repositoriesContributedTo`) e outra com um alias por ano (`y2025: contributionsCollection(from,to)`),
+  porque cada `contributionsCollection` cobre no máximo 1 ano.
+- Some `totalCommitContributions` e junte os `contributionDays` para calcular a sequência. Hoje com 0
+  ainda não quebra a sequência atual.
+- No Actions, `GH_TOKEN: ${{ github.token }}` basta e devolve só números públicos, que batem com
+  github-readme-stats e streak-stats. Token pessoal local soma privados: não compare com ele.
+- Selo que precisa de link próprio (e-mail) vira imagem separada. Para alturas iguais lado a lado,
+  `width` em % proporcional à largura do viewBox (780 e 400 px → 65% e 33%).
+
 ## Conferir depois do push
 
 ```
