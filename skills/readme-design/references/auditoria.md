@@ -29,7 +29,6 @@ descrição cortada), repos fixados, links do README atual que falham e alerta d
 
 - Bio, empresa, site: `gh api -X PATCH user -f bio="..." -f company="..." -f blog=""`
 - Remover rede social: `echo '{"account_urls":["https://linkedin.com/in/x/"]}' | gh api -X DELETE user/social_accounts --input -`
-- Status (emoji + texto): só via GraphQL `changeUserStatus` ou pela interface. Sugira 5 a 10 opções no tema e deixe o usuário escolher.
 - O e-mail público só aceita um endereço já verificado em Settings → Emails. O agente não consegue trocar.
 
 ## Saída do passo

@@ -35,8 +35,3 @@ Escolha **poucos** e no tema. Isto é um cardápio, não uma lista de tarefas.
 | Posts de blog automáticos | médio | `gautamkrishnar/blog-post-workflow`, só se a pessoa escreve |
 | Jogo por issues (xadrez, connect4) | alto | só se a pessoa pedir |
 | Spotify "tocando agora" | alto | precisa de deploy serverless |
-
-## Status do perfil
-
-Sugira 5 a 10 combinações de emoji + texto curto no tema e na voz da pessoa (trabalho, estudo,
-piada recorrente). Status não aparece no README, mas completa a identidade do perfil.
