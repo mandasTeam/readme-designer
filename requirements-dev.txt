@@ -1,0 +1,4 @@
+-r requirements.txt
+resvg-py>=0.2
+pillow>=10
+pytest>=8
