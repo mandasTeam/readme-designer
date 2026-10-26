@@ -10,23 +10,23 @@ sem CSS de página, sem JS, e SVG em `<img>` dentro de sandbox.
 
 O tema sai do mundo da pessoa: o personagem do avatar, o setor, o vocabulário visual.
 Use `vision_analyze` no avatar para tirar a paleta real. Liste 3 a 5 elementos desse mundo
-que viram forma. Exemplo do tema Robin / Teen Titans:
+que viram forma. Cada elemento precisa responder:
 
-- fonte de HQ (Bangers), retícula, legenda inclinada, balão de fala, carimbo "CONFIDENCIAL", onomatopeia;
-- as cores do uniforme (vermelho, amarelo, verde) viram uma faixa que se repete em todos os cards;
-- objetos do universo viram metáforas de seção: cinto de utilidades = stack, comunicador = contato, Torre = estatísticas.
+- que tipografia, textura ou recurso gráfico é típico desse mundo;
+- que cores dele viram um motivo que se repete em todos os cards;
+- que objetos dele viram metáfora de seção (stack, contato, estatísticas), se couber sem forçar.
 
 ## 2. Plano em duas passadas
 
 **Passada 1:** escreva os tokens antes de codar.
 
 ```
-Cor:       ink #0B0B0F · card #121218 · texto #F5F5F0 · acento #FFC93C · faixa #E0262B/#FFC93C/#2E9D4A
-Tipo:      display Bangers (títulos, números) · corpo Barlow Condensed 500/600/700
-Grade:     cards 1200 de largura (600 para pares a 49%), raio 16–18, chips em pílula
-Motivo:    faixa tricolor à esquerda + retícula no canto + sombra sólida deslocada
+Cor:       fundo · card · texto · acento · cores do motivo (hex, com nome e papel)
+Tipo:      display <fonte> (títulos, números) · corpo <fonte> <pesos>
+Grade:     cards 1200 de largura (600 para pares a 49%), raio, forma dos chips
+Motivo:    o elemento do tema que se repete em todo card
 Movimento: um gesto por card (pulsar, piscar, onda); reduced-motion desliga tudo
-Princípio: parece página de gibi, não dashboard de SaaS
+Princípio: uma frase que diz o que o perfil parece e o que ele não parece
 ```
 
 **Passada 2:** revise contra os padrões que denunciam design gerado. Eles são escolha
@@ -38,7 +38,7 @@ legítima **só** quando o tema pede.
 - Numeração 01/02/03 em conteúdo que não é sequência.
 - Destacar uma palavra só no título com cor ou itálico.
 
-O briefing vence: num tema de HQ, caixa-alta e onomatopeia **são** o vocabulário. Use e diga por quê.
+O briefing vence: se o tema pede um desses padrões, ele **é** o vocabulário. Use e diga por quê.
 Fora disso, troque cada padrão que você usaria em qualquer perfil por uma escolha do tema.
 
 ## 3. Hierarquia dentro do card
@@ -67,7 +67,7 @@ No desktop, o GitHub exibe 1200 px em ~830 px (escala 0,69). Abaixo de 15 px na 
 
 - CSS `@keyframes` e SMIL funcionam dentro do SVG em `<img>`. Use pouco: pulsar o emblema,
   estrelas piscando, LED, ondas de sinal.
-- Objetos atravessando o banner (bumerangue, nave) foram vetados pelo usuário. Evite por padrão.
+- Objeto atravessando o banner distrai e compete com o texto. Evite por padrão.
 - Inclua sempre `@media (prefers-reduced-motion:reduce){*{animation:none!important}}` (`svgkit.REDUCED_MOTION`).
 
 ## 6. Acessibilidade

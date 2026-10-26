@@ -11,8 +11,6 @@
 criar e redesenhar READMEs do GitHub. O agente confere os fatos antes de escrever, define um plano
 de design, gera a arte em SVG com texto convertido em path e confere o resultado renderizado antes de dizer que terminou.
 
-Exemplo real feito com ela: [github.com/igorSeberino](https://github.com/igorSeberino) (tema Robin / Teen Titans).
-
 <img src="assets/h-fluxo.svg" width="100%" alt="Como funciona">
 
 1. **Auditoria.** `audit_profile.py` junta perfil, repos, fixados, links mortos e telefone exposto numa saída curta.

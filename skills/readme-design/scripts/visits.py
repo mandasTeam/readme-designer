@@ -4,7 +4,7 @@ O selo do komarev.com não aceita estilo. O README carrega um pixel dele para co
 e mostra o card gerado aqui. Cada leitura do workflow também soma +1 no komarev,
 então descontamos essas leituras (bot_hits) guardadas em visits.json.
 
-    python visits.py dist --user igorSeberino --display fonts/Bangers-Regular.ttf --body fonts/Barlow.ttf
+    python visits.py dist --user <user> --display fonts/Bangers-Regular.ttf --body fonts/Barlow.ttf
     python visits.py dist --count 42 ...      # teste local: sem rede, não infla o contador
 """
 from __future__ import annotations

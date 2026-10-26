@@ -3,8 +3,8 @@
 Junta o que antes eram ~8 chamadas soltas (perfil, repos, fixados, README atual, links):
 filtra antes de entrar no contexto, como o rtk faz com saída de shell.
 
-    python audit_profile.py igorSeberino
-    python audit_profile.py igorSeberino --contrib owner/repo --contrib owner/outro
+    python audit_profile.py <user>
+    python audit_profile.py <user> --contrib owner/repo --contrib owner/outro
 
 Requer gh autenticado. Não altera nada.
 """
