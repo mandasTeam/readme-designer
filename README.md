@@ -56,7 +56,7 @@ skills/readme-design/
 │   ├── widgets.md           stats, streak, cobrinha, visitas, branch output
 │   ├── readme-projeto.md    anatomia de README de projeto e cardápio para perfil
 │   ├── tokens.md            onde o gasto aparece e o que trocar
-│   └── preferencias-igor.md o que o dono aprovou e vetou
+│   └── preferencias-igor.md gosto geral do dono (ponto de partida)
 ├── scripts/                 svgkit, audit_profile, check_urls, contact_sheet, visits, fetch_fonts
 └── templates/               build_assets.py, profile-readme.md, project-readme.md, widgets-workflow.yml
 tests/                       pytest sem rede (svgkit, URLs, contador, template)
