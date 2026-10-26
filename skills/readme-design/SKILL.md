@@ -23,6 +23,12 @@ A identidade visual vem de um plano de design curto, nunca de template.
 - Criar, redesenhar ou "deixar mais bonito" um README de perfil (`<user>/<user>`) ou de projeto.
 - Tematizar um perfil (personagem, franquia, empresa) ou trocar widgets por versões no tema.
 - Revisar um README existente: fatos velhos, links mortos, visual inconsistente.
+- Revisar a documentação de um repo de projeto em **modo convencional** (markdown puro, sem SVG): siga o roteiro "Revisão de documentação de projeto" em `references/readme-projeto.md` e pule os passos 3 e 4.
+
+## Escolher o modo antes de começar
+
+- **Perfil** (`<user>/<user>`) ou pedido explícito de visual: fluxo completo abaixo, com tema e cards SVG.
+- **Repo de projeto** (código, trabalho de grupo, produto): README convencional e explicativo, em markdown cru. Sem tema de fã, sem cards SVG, sem banner. No máximo um badge que responda uma pergunta real (CI). O tema pessoal do perfil **nunca** vaza para repo de projeto.
 
 Não use para: operações gerais de PR, issue ou release (skill `github`), nem para site ou app (CSS/JS de verdade).
 
@@ -104,6 +110,6 @@ O detalhe está em `references/design.md`.
 | `references/design.md` | passo 3: plano, clichês, hierarquia, acessibilidade, copy |
 | `references/svg-pipeline.md` | passo 4: texto em path, peças do svgkit, tamanho, prévia |
 | `references/widgets.md` | passo 5: stats, streak, cobrinha, visitas, branch `output` |
-| `references/readme-projeto.md` | README de projeto e catálogo de ideias para perfil |
+| `references/readme-projeto.md` | README de projeto, revisão de docs de repo contra o código, catálogo de ideias para perfil |
 | `references/tokens.md` | economia de tokens em detalhe |
-| `references/preferencias-igor.md` | sempre que o usuário for o Igor |
+| `references/preferencias-igor.md` | sempre que o usuário for o Igor (ponto de partida, não receita) |
