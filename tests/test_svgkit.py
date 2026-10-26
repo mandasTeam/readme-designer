@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 
 import pytest
-from svgkit import MissingGlyph, Theme, card_frame, heading, num, rich_lines, rich_paths, svg
+from svgkit import MissingGlyph, Theme, card_frame, heading, num, pill, rich_lines, rich_paths, svg
 
 NS = "{http://www.w3.org/2000/svg}"
 
@@ -23,7 +23,7 @@ def test_path_ancora_no_meio_desloca_metade_da_largura(fonts):
 def test_acentos_viram_path_e_glifo_ausente_falha(fonts):
     assert fonts["body"].path("Implantação", 20, 0, 20)
     with pytest.raises(MissingGlyph):
-        fonts["body"].path("🦇", 20, 0, 20)
+        fonts["body"].path("🙂", 20, 0, 20)
 
 
 def test_fit_encolhe_ate_caber(fonts):
@@ -43,14 +43,19 @@ def test_rich_lines_quebra_so_nos_espacos(fonts):
 
 
 def test_heading_e_svg_validos(fonts):
-    root = ET.fromstring(heading("MISSÕES", fonts["display"], Theme()))
-    assert root.find(f"{NS}title").text == "MISSÕES"
+    root = ET.fromstring(heading("Projetos", fonts["display"], Theme()))
+    assert root.find(f"{NS}title").text == "Projetos"
     assert root.get("width") == "1200"
     ET.fromstring(svg(10, 10, "a & <b>", ""))  # escapa o título
 
 
-def test_card_frame_usa_as_cores_da_faixa():
-    theme = Theme(stripes=["#111111", "#222222", "#333333"])
-    body = "".join(card_frame(600, 150, theme))
-    for c in theme.stripes:
-        assert c in body
+def test_card_frame_e_pill_usam_os_tokens_do_tema(fonts):
+    theme = Theme(card="#111111", line="#222222", accent="#333333", on_accent="#444444")
+    frame = "".join(card_frame(600, 150, theme))
+    assert "#111111" in frame and "#222222" in frame
+    tag = "".join(pill(0, 0, "Python", fonts["bold"], 20, theme.accent, theme.on_accent))
+    assert "#333333" in tag and "#444444" in tag
+
+
+def test_fonte_variavel_muda_com_o_eixo(fonts):
+    assert fonts["display"].width("Projetos", 30) > fonts["body"].width("Projetos", 30)

@@ -1,13 +1,17 @@
 """Baixa fontes OFL do repositório google/fonts (ttf + OFL.txt) para gerar SVG offline.
 
-    python fetch_fonts.py tools/fonts bangers/Bangers-Regular.ttf barlowcondensed/BarlowCondensed-SemiBold.ttf
+    python fetch_fonts.py tools/fonts "<familia>/<Arquivo>.ttf" ...
+    python fetch_fonts.py tools/fonts "ibmplexsans/IBMPlexSans[wdth,wght].ttf"
 
 O caminho é <família em minúsculas>/<Arquivo>.ttf, igual ao de
-https://github.com/google/fonts/tree/main/ofl. Commite as fontes e as licenças.
+https://github.com/google/fonts/tree/main/ofl. A maioria das famílias hoje é variável
+(Arquivo[wght].ttf): um arquivo cobre todos os pesos, escolhidos em svgkit.Font(..., wght=N).
+Commite as fontes e as licenças.
 """
 from __future__ import annotations
 
 import sys
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -21,7 +25,7 @@ def fetch(rel: str, dest: Path) -> None:
     for src, out in targets:
         if out.exists():
             continue
-        with urllib.request.urlopen(BASE + src, timeout=30) as r:
+        with urllib.request.urlopen(BASE + urllib.parse.quote(src), timeout=30) as r:
             out.write_bytes(r.read())
         print(f"{out} ({out.stat().st_size // 1024} KB)")
 

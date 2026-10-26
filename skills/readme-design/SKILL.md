@@ -55,7 +55,7 @@ Cada passo só termina quando o critério de pronto estiver cumprido.
 
    Depois revise o plano contra a lista de clichês (`references/design.md`).
    - Pronto quando o plano estiver escrito e cada escolha tiver motivo ligado ao tema.
-4. **Gerar a arte.** Copie `templates/build_assets.py` para `<repo>/tools/` e `scripts/svgkit.py` junto. Ajuste o `CONFIG` e rode o script.
+4. **Gerar a arte.** Copie `templates/build_assets.py` para `<repo>/tools/` e `scripts/svgkit.py` junto. Preencha o `CONFIG` com os tokens do plano, desenhe o motivo em `motif()` e rode o script. O template e o `svgkit` são estrutura neutra: o estilo é sempre do projeto, nunca um padrão da skill.
    - Pronto quando o build rodar sem `MissingGlyph` e cada SVG tiver < 250 KB. Receita em `references/svg-pipeline.md`.
 5. **Montar o README** a partir de `templates/profile-readme.md` ou `templates/project-readme.md`. Para widgets vivos, copie `templates/widgets-workflow.yml` (detalhes em `references/widgets.md`).
    - Pronto quando todo `<img>` tiver `alt` com o texto inteiro do card e não sobrar `##` solto, porque o título também é SVG.

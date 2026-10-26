@@ -45,7 +45,7 @@ Fora disso, troque cada padrão que você usaria em qualquer perfil por uma esco
 
 | Nível | Fonte | Cor | Tamanho na origem (1200 px) |
 |---|---|---|---|
-| Rótulo | corpo bold, tracking 2 | acento ou cor da faixa | 15–18 |
+| Rótulo | corpo bold | acento | 15–18 |
 | Valor | corpo semibold | texto claro | 26–30 (use `fit()` para caber) |
 | Apoio | corpo regular | cinza (muted) | 18–22 |
 | Título do card | display | branco ou acento | 32–58 |
@@ -58,15 +58,15 @@ No desktop, o GitHub exibe 1200 px em ~830 px (escala 0,69). Abaixo de 15 px na 
 - **Uma linguagem.** Título de seção, texto corrido, ficha, stack, contato e contador: tudo SVG
   no mesmo motivo. Tabela markdown, `##` e selo padrão destoam e a pessoa percebe.
 - **Pares lado a lado:** dois cards de 600 px com `width="49%"` no mesmo `<p align="center">`.
-- **Tema claro e escuro:** cards com fundo próprio. Elemento transparente (balão, título) precisa
-  de contorno forte. Confira sobre `#0d1117` e sobre `#ffffff`.
+- **Tema claro e escuro:** cards com fundo próprio. Elemento sem fundo próprio (título, forma solta)
+  some no tema claro: dê fundo ou contorno forte. Confira sobre `#0d1117` e sobre `#ffffff`.
 - **Widgets externos** recebem as cores dos tokens nos parâmetros da URL (`bg_color`, `title_color`…).
 - **Tire um acessório:** antes de publicar, remova o enfeite que não informa nada.
 
 ## 5. Movimento
 
-- CSS `@keyframes` e SMIL funcionam dentro do SVG em `<img>`. Use pouco: pulsar o emblema,
-  estrelas piscando, LED, ondas de sinal.
+- CSS `@keyframes` e SMIL funcionam dentro do SVG em `<img>`. Use pouco: pulsar um elemento,
+  piscar um indicador, uma onda lenta.
 - Objeto atravessando o banner distrai e compete com o texto. Evite por padrão.
 - Inclua sempre `@media (prefers-reduced-motion:reduce){*{animation:none!important}}` (`svgkit.REDUCED_MOTION`).
 
@@ -81,7 +81,7 @@ No desktop, o GitHub exibe 1200 px em ~830 px (escala 0,69). Abaixo de 15 px na 
 
 - Frase normal, verbo simples, uma função por elemento. Fale do jeito que a pessoa fala.
 - Nada de piada forçada nem aparte de tiozão ("leia-se: …", "sem medo de …").
-  Uma piada recorrente escolhida pela pessoa já basta.
+  Humor só se vier da pessoa.
 - Sem disclaimer de rodapé ("X é marca de…", "feito com…") se ninguém pediu.
 - README de quem já está empregado não é currículo: cargo e stack na frente, formação em uma
   linha, sem certificações nem telefone.

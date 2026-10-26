@@ -11,11 +11,13 @@ acentos) e desenhar cada glifo como `<path>` com fontTools. O resultado sai igua
 
 ```
 terminal("python -m venv .venv-readme && .venv-readme/Scripts/python -m pip install fonttools uharfbuzz resvg-py pillow")
-terminal("python scripts/fetch_fonts.py tools/fonts bangers/Bangers-Regular.ttf barlowcondensed/BarlowCondensed-SemiBold.ttf barlowcondensed/BarlowCondensed-Bold.ttf")
+terminal("python scripts/fetch_fonts.py tools/fonts \"<familia>/<Arquivo>.ttf\" ...")
 ```
 
-Combinação que funciona: uma fonte display de personalidade (títulos e números) e uma
-condensada legível para o corpo, com 2 ou 3 pesos. Bangers só tem caixa-alta.
+As fontes saem do plano de design do projeto: em geral uma display para títulos e números e
+uma legível para o corpo, com 2 ou 3 pesos. Antes de fechar a escolha, confira se a família tem
+caixa-baixa, acentos do pt-BR e os símbolos que o texto usa (`MissingGlyph` avisa no build).
+Fonte variável (`Arquivo[wght].ttf`) vale um arquivo para todos os pesos: `Font(p, wght=700)`.
 
 ## Peças do `svgkit.py`
 
@@ -25,18 +27,20 @@ condensada legível para o corpo, com 2 ou 3 pesos. Bangers só tem caixa-alta.
 | `Font.width / cap_height / wrap / fit` | medir, centralizar na vertical, quebrar linha, encolher até caber |
 | `rich_lines + rich_paths` | parágrafo com trechos em negrito/cor, quebrando só nos espaços |
 | `svg(w, h, title, body, style)` | raiz com `<title>` acessível |
-| `card_frame(w, h, theme)` | fundo, borda, retícula no canto, faixa de cores do tema |
-| `heading(text, display, theme)` | título de seção 1200×72 (caixa inclinada + régua) |
-| `chip`, `balloon`, `warning_icon`, `halftone`, `data_uri` | legenda inclinada, balão de fala sem emenda, ⚠ desenhado, retícula, base64 |
+| `card_frame(w, h, theme, rx, stroke)` | fundo e borda do card, sem enfeite |
+| `heading(text, font, theme)` | título de seção 1200×64 com fundo próprio e régua opcional |
+| `pill`, `warning_icon`, `data_uri` | etiqueta com fundo, ⚠ desenhado, imagem em base64 |
 
-`Theme` concentra as cores do plano. Trocar o tema é trocar um objeto, não caçar hex no código.
+O svgkit não tem estilo: são peças estruturais neutras. `Theme` guarda os tokens de cor do
+plano (motivo em `extra`), e forma, textura e motivo do projeto são desenhados no
+`build_assets.py` dele (função `motif()`), não no svgkit. Exemplo de estilo próprio sobre o
+esqueleto: `tools/build_banner.py` deste repositório.
 
 ## Receitas
 
-- **Contorno legível sobre fundo agitado:** `stroke` + `paint-order="stroke"` + uma cópia
-  deslocada (5–6 px) em cor escura atrás, que vira sombra sólida de HQ.
+- **Contorno legível sobre fundo agitado:** `stroke` + `paint-order="stroke"` atrás do preenchimento.
 - **Centralizar na vertical:** `baseline = centro + cap_height(size) / 2`.
-- **skewX:** com `skewX(-12)`, x desloca `-y·tan(12°)`. Some `y·0,2126` ao x de quem fica dentro do grupo inclinado.
+- **Forma inclinada (skewX), se o plano pedir:** com `skewX(-a)`, x desloca `-y·tan(a)`. Some `y·tan(a)` ao x de quem fica dentro do grupo inclinado.
 - **Foto:** `data_uri("tools/avatar.jpg")` num `<image>` com `clip-path` de retângulo arredondado.
   Baixe o avatar com `curl -L "https://avatars.githubusercontent.com/u/<id>?s=400"`.
 - **Ícones de terceiros (skillicons):** baixe o SVG uma vez para `tools/` e embuta com `data_uri`.
@@ -51,7 +55,7 @@ condensada legível para o corpo, com 2 ou 3 pesos. Bangers só tem caixa-alta.
 ## Prévia sem navegador
 
 ```
-terminal("python scripts/contact_sheet.py sheet.png assets/ --pair 'mission-*.svg'")
+terminal("python scripts/contact_sheet.py sheet.png assets/ --pair 'card-*.svg'")
 vision_analyze(image_url="sheet.png", question="sobreposição, texto cortado, alinhamento?")
 vision_analyze(image_url="sheet.png", region=[0, 0, 1248, 480], question="...")   # zoom num card
 ```

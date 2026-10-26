@@ -42,6 +42,8 @@ O selo do komarev.com não aceita estilo. Por isso:
    (a própria leitura conta uma visita), mostra `raw - bot_hits` e grava `visits.svg` + `visits.json`.
    O estado anterior vem de `git fetch --depth=1 origin output && git show FETCH_HEAD:visits.json`.
 4. Teste local com `--count N`: sem rede e sem inflar o contador.
+5. Cores e fontes do projeto: `--theme tools/theme.json` (campos de `svgkit.Theme`) e
+   `--display "fonts/<Arquivo>[wght].ttf@wght=700"` para fonte variável.
 
 Avise o usuário: o número atualiza na cadência do cron, não a cada visita.
 

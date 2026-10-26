@@ -1,18 +1,19 @@
 <!-- Esqueleto de README de perfil (<user>/<user>). Cada bloco visual é um SVG de assets/.
      Regras: width="100%" (ou 49% para pares de 600px), alt com o texto INTEIRO do card,
-     cards clicáveis dentro de <a>, nada de ## solto: o título também é SVG. -->
+     cards clicáveis dentro de <a>, nada de ## solto: o título também é SVG.
+     Cores e fontes em MAIÚSCULAS (ACENTO, FUNDO, FONTE_DISPLAY...) = tokens do plano de design, em hex sem #. -->
 <p align="center">
   <img src="assets/banner.svg" width="100%" alt="NOME — CARGO @ EMPRESA. O que faz, numa linha.">
 </p>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Bangers&size=30&duration=3200&pause=900&color=FFC93C&center=true&vCenter=true&width=720&height=56&lines=Linha+1;Linha+2" alt="Linha 1 · Linha 2">
+  <img src="https://readme-typing-svg.demolab.com?font=FONTE_DISPLAY&size=30&duration=3200&pause=900&color=ACENTO&center=true&vCenter=true&width=720&height=56&lines=Linha+1;Linha+2" alt="Linha 1 · Linha 2">
 </p>
 
-<img src="assets/h-sobre.svg" width="100%" alt="Quem é esse aí?">
+<img src="assets/h-sobre.svg" width="100%" alt="Sobre">
 
 <p align="center">
-  <img src="assets/about.svg" width="100%" alt="TEXTO COMPLETO DO BALÃO">
+  <img src="assets/about.svg" width="100%" alt="TEXTO COMPLETO DO CARD">
 </p>
 
 <img src="assets/h-projetos.svg" width="100%" alt="Projetos">
@@ -25,8 +26,8 @@
 <img src="assets/h-stats.svg" width="100%" alt="Estatísticas">
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=USER&show_icons=true&locale=pt-br&bg_color=121218&title_color=FFC93C&icon_color=2E9D4A&text_color=C9CBD3&border_color=E0262B&border_radius=14" height="155" alt="Estatísticas do GitHub">
-  <img src="https://streak-stats.demolab.com?user=USER&locale=pt_BR&background=121218&border=E0262B&stroke=2A2A35&ring=E0262B&fire=FFC93C&currStreakNum=F5F5F0&sideNums=F5F5F0&currStreakLabel=FFC93C&sideLabels=2E9D4A&dates=8B8E99&border_radius=14" height="155" alt="Sequência de contribuições">
+  <img src="https://github-readme-stats.vercel.app/api?username=USER&show_icons=true&locale=pt-br&bg_color=FUNDO&title_color=ACENTO&icon_color=ACENTO&text_color=TEXTO&border_color=BORDA&border_radius=14" height="155" alt="Estatísticas do GitHub">
+  <img src="https://streak-stats.demolab.com?user=USER&locale=pt_BR&background=FUNDO&border=BORDA&stroke=BORDA&ring=ACENTO&fire=ACENTO&currStreakNum=TEXTO&sideNums=TEXTO&currStreakLabel=ACENTO&sideLabels=APOIO&dates=APOIO&border_radius=14" height="155" alt="Sequência de contribuições">
 </p>
 
 <p align="center">

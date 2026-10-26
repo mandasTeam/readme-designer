@@ -78,8 +78,8 @@ Escolha **poucos** e no tema. Isto é um cardápio, não uma lista de tarefas.
 | Ideia | Custo | Observação |
 |---|---|---|
 | Banner próprio em SVG | médio | o momento memorável do perfil |
-| Texto digitando | baixo | 3 a 5 linhas, uma pode ser a piada recorrente |
-| Ficha/dossiê com foto | médio | substitui a tabela "sobre mim" |
+| Texto digitando | baixo | 3 a 5 linhas curtas |
+| Card de apresentação com foto | médio | substitui a tabela "sobre mim" |
 | Cards de projeto (pares a 49%) | médio | creditar só a parte da pessoa |
 | Stats + streak tematizados | baixo | parâmetros de cor na URL |
 | Cobrinha no gráfico de contribuição | baixo | workflow + `<picture>` claro/escuro |

@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="assets/banner.svg" width="100%" alt="README DESIGN — skill para agentes. README de perfil e de projeto com cara de design, não de template. Fatos conferidos, arte em SVG próprio, poucos tokens.">
+  <img src="assets/banner.svg" width="100%" alt="readme-design — skill para agentes de código. README de perfil e de projeto com design próprio, não de template. Fatos conferidos, arte em SVG próprio, poucos tokens.">
 </p>
 
 <p align="center">
-  <a href="https://github.com/igorSeberino/readme-design-skill/actions/workflows/ci.yml"><img src="https://github.com/igorSeberino/readme-design-skill/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/github/license/igorSeberino/readme-design-skill" alt="Licença MIT">
+  <a href="https://github.com/mandasTeam/readme-designer/actions/workflows/ci.yml"><img src="https://github.com/mandasTeam/readme-designer/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <img src="https://img.shields.io/github/license/mandasTeam/readme-designer" alt="Licença MIT">
 </p>
 
 **readme-design** é uma skill no formato `SKILL.md` (Agent Skills) que ensina um agente de código a
@@ -15,8 +15,8 @@ de design, gera a arte em SVG com texto convertido em path e confere o resultado
 
 1. **Auditoria.** `audit_profile.py` junta perfil, repos, fixados, links mortos e telefone exposto numa saída curta.
 2. **Uma rodada de perguntas.** Tudo o que a auditoria não resolve vai num lote só.
-3. **Plano de design.** Cores, fontes, grade, motivo e movimento, revisados contra os clichês de design gerado.
-4. **Arte em SVG.** `svgkit.py` molda o texto com HarfBuzz e desenha cada glifo como path, porque o GitHub não carrega fonte dentro de `<img>`.
+3. **Plano de design.** Cores, fontes, grade, motivo e movimento tirados do assunto de cada projeto, revisados contra os clichês de design gerado. A skill não tem estilo próprio.
+4. **Arte em SVG.** `svgkit.py` (peças neutras, sem estilo) molda o texto com HarfBuzz e desenha cada glifo como path, porque o GitHub não carrega fonte dentro de `<img>`.
 5. **README e widgets.** Esqueletos de perfil e de projeto; stats, cobrinha e visitas no tema via workflow numa branch `output`.
 6. **Conferência.** Folha PNG em fundo escuro e claro para inspecionar com visão, checagem de URLs, imagens carregadas no perfil publicado e execução do workflow.
 
@@ -27,13 +27,13 @@ mandar relatório curto. Nada disso corta a verificação.
 <img src="assets/h-instalar.svg" width="100%" alt="Instalação">
 
 ```bash
-git clone https://github.com/igorSeberino/readme-design-skill.git
+git clone https://github.com/mandasTeam/readme-designer.git
 ```
 
 | Agente | Como instalar |
 |---|---|
 | Hermes Agent | adicione `<clone>/skills` em `skills.external_dirs` no `config.yaml` |
-| Claude Code | `cp -r readme-design-skill/skills/readme-design ~/.claude/skills/` |
+| Claude Code | `cp -r readme-designer/skills/readme-design ~/.claude/skills/` |
 | Outros com suporte a `SKILL.md` | copie `skills/readme-design/` para a pasta de skills do agente |
 
 Os scripts precisam de Python 3.11+:
@@ -58,7 +58,7 @@ skills/readme-design/
 ├── scripts/                 svgkit, audit_profile, check_urls, contact_sheet, visits, fetch_fonts
 └── templates/               build_assets.py, profile-readme.md, project-readme.md, widgets-workflow.yml
 tests/                       pytest sem rede (svgkit, URLs, contador, template)
-tools/build_banner.py        gera a arte deste README com o próprio template
+tools/build_banner.py        gera a arte deste README: o template com o plano de design deste repo
 ```
 
 Para desenvolver: `python -m pytest -q` e `python tools/build_banner.py`. Commits seguem
@@ -78,4 +78,4 @@ READMEs: [awesome-readme](https://github.com/matiassingers/awesome-readme),
 
 ### Licença
 
-MIT, veja [LICENSE](LICENSE). As fontes em `tools/fonts/` (Bangers, Barlow Condensed) seguem a SIL Open Font License; os textos estão ao lado delas.
+MIT, veja [LICENSE](LICENSE). As fontes em `tools/fonts/` (IBM Plex Sans, IBM Plex Mono) seguem a SIL Open Font License; os textos estão ao lado delas.
