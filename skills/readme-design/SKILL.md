@@ -32,7 +32,7 @@ A identidade visual vem de um plano de design curto, nunca de template.
 - **Repo de projeto** (código, trabalho de grupo, produto): README convencional e explicativo, em markdown cru. Sem tema de fã, sem cards SVG, sem banner. No máximo um badge que responda uma pergunta real (CI). O tema pessoal do perfil **nunca** vaza para repo de projeto.
 
 - **Pedido vago de "capa"/"arte" de perfil ou org:** antes de desenhar, cheque o que falta (`gh api orgs/<org> --jq .avatar_url` e veja se é identicon; `gh api graphql` com `usesCustomOpenGraphImage` por repo; README já tem card?) e faça **um** `clarify` com as opções concretas (avatar 500×500, social preview 1280×640, banner do README). Cada uma tem formato e restrição diferente; chutar errado joga o trabalho fora.
-- **Já existe direção de arte** (ex.: `BRAND.md` em `team-docs`): ela manda. Reaproveite tokens e funções do gerador existente (`plate`, `rays`, `dither`…) em vez de copiar o template da skill, e atualize o documento da marca com a peça nova.
+- **Já existe direção de arte** (ex.: `BRAND.md` em `team-docs`): ela manda, inclusive no README de um repo do próprio time (ex.: o desta skill) — pedido de "README estilizado" ali segue a marca, não o modo projeto nem o template neutro. Reaproveite tokens e funções do gerador existente (`plate`, `rays`, `dither`, `Glyphs`…) em vez de copiar o template da skill; copie fontes e figura para o repo para o CI gerar sem depender do outro; e atualize o documento da marca citando a peça nova como exemplo.
 
 Não use para: operações gerais de PR, issue ou release (skill `github`), nem para site ou app (CSS/JS de verdade).
 
@@ -67,7 +67,7 @@ Cada passo só termina quando o critério de pronto estiver cumprido.
    - `terminal("python scripts/contact_sheet.py sheet.png assets/ --pair 'card-*.svg'")` e depois `vision_analyze`, recortando por região onde houver texto pequeno.
    - `python scripts/check_urls.py README.md`.
    - Push com Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`, `ci:`).
-   - Abra `github.com/<user>` e confirme que todo `article img` tem `naturalWidth > 0`.
+   - Abra `github.com/<user>` e confirme que todo `article img` tem `naturalWidth > 0`. Sem navegador, confira pelo HTML que o GitHub renderiza: `gh api repos/<owner>/<repo>/readme -H "Accept: application/vnd.github.html"`, extraia cada `src` de `<img>`, faça `curl -sL` em cada um (200 e `image/svg+xml`; caminho relativo vira `github.com/<owner>/<repo>/raw/main/<src>`) e `cmp` do SVG baixado com o local.
    - Confirme a última execução do workflow com `gh run view` e a branch `output` com os arquivos.
    - Pronto quando tudo isso passar. Só então reporte.
 
@@ -103,13 +103,13 @@ O detalhe está em `references/design.md`.
 - **Serviço gratuito cai.** Confira cada widget com `check_urls.py` antes de usar. Em out/2026, `github-profile-trophy.vercel.app` respondia 402.
 - **O `snk` deixa `dist/` como root.** Rode os geradores Python antes dele no workflow.
 - **Escrita bloqueada no Hermes:** `write_file` recusa sobrescrever arquivo lido só em parte. Apague o arquivo e escreva de novo, ou edite via Python. Em arquivo com CRLF o `patch` erra: normalize `\r\n`, edite e restaure.
-- **Chrome headless pode não abrir** no Windows. Para conferir, `resvg-py` dispensa navegador.
+- **Sequência de escape em literal Python vira quebra de linha real** quando passa por `patch` ou heredoc+`replace`, e o gerador para com `SyntaxError`. Edite essas linhas com um script `.py` que monta a barra com `chr(92)`, e confira com `grep -n` antes de rodar.
+- **Chrome headless pode não abrir** no Windows. Para conferir a arte, `resvg-py` (folha de conferência) dispensa navegador; para o publicado, use a checagem por `gh api … vnd.github.html` do passo 6.
 - **Perfil de organização** fica em `<org>/.github/profile/README.md`; imagens com `../assets/x.svg` resolvem para `github.com/<org>/.github/raw/main/assets/x.svg` (conferido).
 - **Peça nova entra no gerador existente, não num script irmão.** Geradores costumam limpar `assets/*.svg` antes de escrever, e apagam a saída do outro script. Acrescente a função e o arquivo ao `main()` do mesmo build e rode tudo para confirmar que as peças antigas saíram idênticas (`git status` limpo nelas).
 - **Avatar de organização não muda por API.** Gere o PNG, commite e passe o roteiro: `github.com/organizations/<org>/settings/profile` → Profile picture → Edit → Upload a photo. Só faça pelo navegador se houver login salvo no cofre.
-- **README de repo numa marca de folha única:** texto em path não se copia nem tem link. Ponha comandos e links num `<details>` abaixo da folha (sem `##` solto) e gere o `alt` do `<title>` pelo script.
-- **`Path.write_text` no Windows grava CRLF.** Em gerador que escreve README ou SVG, passe `newline="
-"`.
+- **README em folha única é só a folha.** Nada embaixo: nem `<details>` com comandos ou referências, nem linha de selo/licença. O Igor chamou isso de lixo. Comando, instalação e licença vão dentro do card; o `alt` sai do `<title>` pelo script.
+- **`Path.write_text` no Windows grava CRLF.** Em gerador que escreve README ou SVG, passe `newline` com LF (barra-n); ao reler para substituir, normalize CRLF antes do `re.sub`.
 - **LinkedIn responde 999 a robôs.** Não dá para verificar; pergunte ao usuário.
 
 ## Referências (carregue só no passo que pede)
