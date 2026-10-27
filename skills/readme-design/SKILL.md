@@ -1,6 +1,6 @@
 ---
 name: readme-design
-description: "Use ao criar, redesenhar ou revisar README de perfil ou de projeto no GitHub. Audita os fatos, planeja o design, gera a arte em SVG próprio e confere o resultado renderizado, gastando poucos tokens."
+description: "Use ao criar, redesenhar ou revisar README de perfil ou de projeto no GitHub, ou a arte de perfil (avatar, social preview). Audita os fatos, planeja o design, gera a arte em SVG próprio e confere o resultado renderizado, gastando poucos tokens."
 version: 1.0.0
 author: Igor Seberino (igorSeberino)
 license: MIT
@@ -23,12 +23,16 @@ A identidade visual vem de um plano de design curto, nunca de template.
 - Criar, redesenhar ou "deixar mais bonito" um README de perfil (`<user>/<user>`) ou de projeto.
 - Tematizar um perfil (personagem, franquia, empresa) ou trocar widgets por versões no tema.
 - Revisar um README existente: fatos velhos, links mortos, visual inconsistente.
+- Arte de perfil fora do README: avatar de usuário/org, social preview de repo (1280×640). Receita em `references/svg-pipeline.md` ("Avatar").
 - Revisar a documentação de um repo de projeto em **modo convencional** (markdown puro, sem SVG): siga o roteiro "Revisão de documentação de projeto" em `references/readme-projeto.md` e pule os passos 3 e 4.
 
 ## Escolher o modo antes de começar
 
 - **Perfil** (`<user>/<user>`) ou pedido explícito de visual: fluxo completo abaixo, com tema e cards SVG.
 - **Repo de projeto** (código, trabalho de grupo, produto): README convencional e explicativo, em markdown cru. Sem tema de fã, sem cards SVG, sem banner. No máximo um badge que responda uma pergunta real (CI). O tema pessoal do perfil **nunca** vaza para repo de projeto.
+
+- **Pedido vago de "capa"/"arte" de perfil ou org:** antes de desenhar, cheque o que falta (`gh api orgs/<org> --jq .avatar_url` e veja se é identicon; `gh api graphql` com `usesCustomOpenGraphImage` por repo; README já tem card?) e faça **um** `clarify` com as opções concretas (avatar 500×500, social preview 1280×640, banner do README). Cada uma tem formato e restrição diferente; chutar errado joga o trabalho fora.
+- **Já existe direção de arte** (ex.: `BRAND.md` em `team-docs`): ela manda. Reaproveite tokens e funções do gerador existente (`plate`, `rays`, `dither`…) em vez de copiar o template da skill, e atualize o documento da marca com a peça nova.
 
 Não use para: operações gerais de PR, issue ou release (skill `github`), nem para site ou app (CSS/JS de verdade).
 
@@ -100,6 +104,12 @@ O detalhe está em `references/design.md`.
 - **O `snk` deixa `dist/` como root.** Rode os geradores Python antes dele no workflow.
 - **Escrita bloqueada no Hermes:** `write_file` recusa sobrescrever arquivo lido só em parte. Apague o arquivo e escreva de novo, ou edite via Python. Em arquivo com CRLF o `patch` erra: normalize `\r\n`, edite e restaure.
 - **Chrome headless pode não abrir** no Windows. Para conferir, `resvg-py` dispensa navegador.
+- **Perfil de organização** fica em `<org>/.github/profile/README.md`; imagens com `../assets/x.svg` resolvem para `github.com/<org>/.github/raw/main/assets/x.svg` (conferido).
+- **Peça nova entra no gerador existente, não num script irmão.** Geradores costumam limpar `assets/*.svg` antes de escrever, e apagam a saída do outro script. Acrescente a função e o arquivo ao `main()` do mesmo build e rode tudo para confirmar que as peças antigas saíram idênticas (`git status` limpo nelas).
+- **Avatar de organização não muda por API.** Gere o PNG, commite e passe o roteiro: `github.com/organizations/<org>/settings/profile` → Profile picture → Edit → Upload a photo. Só faça pelo navegador se houver login salvo no cofre.
+- **README de repo numa marca de folha única:** texto em path não se copia nem tem link. Ponha comandos e links num `<details>` abaixo da folha (sem `##` solto) e gere o `alt` do `<title>` pelo script.
+- **`Path.write_text` no Windows grava CRLF.** Em gerador que escreve README ou SVG, passe `newline="
+"`.
 - **LinkedIn responde 999 a robôs.** Não dá para verificar; pergunte ao usuário.
 
 ## Referências (carregue só no passo que pede)
@@ -108,7 +118,7 @@ O detalhe está em `references/design.md`.
 |---|---|
 | `references/auditoria.md` | passo 1: o que conferir e como |
 | `references/design.md` | passo 3: plano, clichês, hierarquia, acessibilidade, copy |
-| `references/svg-pipeline.md` | passo 4: texto em path, peças do svgkit, tamanho, prévia |
+| `references/svg-pipeline.md` | passo 4: texto em path, peças do svgkit, tamanho, prévia, avatar em PNG |
 | `references/widgets.md` | passo 5: stats, streak, cobrinha, visitas, branch `output` |
 | `references/readme-projeto.md` | README de projeto, revisão de docs de repo contra o código, catálogo de ideias para perfil |
 | `references/tokens.md` | economia de tokens em detalhe |
