@@ -415,19 +415,17 @@ def folio(c: dict, f: dict[str, Font]) -> str:
     style = ("@keyframes tw{0%,100%{opacity:0}45%{opacity:1}}"
              ".sp{opacity:0;animation:tw 2.6s ease-in-out infinite}" + REDUCED_MOTION
              + "@media (prefers-reduced-motion:reduce){.sp{opacity:.8}}")
-    cmd = lambda s: s.removeprefix("$ ")  # noqa: E731
+    # O alt do README copia este título. Sem URL nem < >: o GitHub corta o atributo e o resto do
+    # texto vaza embaixo da imagem. Por isso é um resumo, não o card inteiro palavra por palavra.
     about = "".join(t for t, _ in c["about"])
     title = " ".join([
-        f'{"-".join(c["name"])}, {c["repo"]}. {c["tagline"]} {about}',
-        "O que entrega: " + "; ".join(c["promises"]) + ".",
-        "Como funciona: " + " ".join(f"{n}. {nm}: {ds}" for n, nm, ds in c["steps"]),
-        "Poucos tokens: " + "; ".join(c["tokens"]) + ". " + c["tokens_note"],
-        "Instalação: " + cmd(c["clone"]) + ". " + " ".join(f"{a}: {cmd(h_)}." for a, h_ in c["agents"])
-        + " Os scripts pedem Python 3.11+: " + cmd(c["pip"]) + ".",
-        "Estrutura: " + "; ".join(p.strip("│├└─ ") + (f" ({n})" if n else "") for p, n in c["tree"]) + ".",
-        "Para desenvolver: " + cmd(c["dev"]) + ".",
-        f'{c["footer"][0]}. {c["footer"][1]}.',
+        f'{"-".join(c["name"])}, do mandasTeam. {c["tagline"]} {about}',
+        "Como funciona: " + ", ".join(nm for _, nm, _ in c["steps"]).lower() + ".",
+        "Poucos tokens. " + c["tokens_note"],
+        "Instalação: clone o repo e copie skills/readme-design para as skills do agente"
+        " (Hermes Agent, Claude Code ou outro que leia SKILL.md). Licença MIT.",
     ])
+    assert not re.search(r"https?:|[<>]", title), "alt com URL ou < > quebra no GitHub"
     return svg(W, h, title, "".join(head + body) + f"<defs>{G.defs()}</defs>", style)
 
 

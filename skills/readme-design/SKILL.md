@@ -109,6 +109,7 @@ O detalhe está em `references/design.md`.
 - **Peça nova entra no gerador existente, não num script irmão.** Geradores costumam limpar `assets/*.svg` antes de escrever, e apagam a saída do outro script. Acrescente a função e o arquivo ao `main()` do mesmo build e rode tudo para confirmar que as peças antigas saíram idênticas (`git status` limpo nelas).
 - **Avatar de organização não muda por API.** Gere o PNG, commite e passe o roteiro: `github.com/organizations/<org>/settings/profile` → Profile picture → Edit → Upload a photo. Só faça pelo navegador se houver login salvo no cofre.
 - **README em folha única é só a folha.** Nada embaixo: nem `<details>` com comandos ou referências, nem linha de selo/licença. O Igor chamou isso de lixo. Comando, instalação e licença vão dentro do card; o `alt` sai do `<title>` pelo script.
+- **`alt` com URL ou `<>` vaza texto no GitHub.** O sanitizador corta o atributo e o resto aparece como texto embaixo da imagem. Em card grande, o `alt` é um resumo sem URL nem `<>`. Antes do push, renderize com `gh api markdown -f mode=gfm -f text="$(cat README.md)"` e confira que não sobra texto visível.
 - **`Path.write_text` no Windows grava CRLF.** Em gerador que escreve README ou SVG, passe `newline` com LF (barra-n); ao reler para substituir, normalize CRLF antes do `re.sub`.
 - **LinkedIn responde 999 a robôs.** Não dá para verificar; pergunte ao usuário.
 
